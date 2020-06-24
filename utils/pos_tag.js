@@ -1,4 +1,5 @@
 const posTag = require("vntk").posTag();
+const { replaceAll } = require("./common");
 
 // Input: "Chợ thịt chó nổi tiếng ở TP Hồ Chí Minh bị truy quét";
 // Output:
@@ -25,15 +26,18 @@ function getWordsAttachedTag(string) {
 }
 
 function toString(wordsAttachedTag) {
-  return wordsAttachedTag
-    .filter((word) => {
-      return word.type !== "CH";
-    })
-    .map((word) => {
-      return word.text;
-    })
-    .join(" ")
-    .replace("  ", " ");
+  return replaceAll(
+    wordsAttachedTag
+      .filter((word) => {
+        return word.type !== "CH";
+      })
+      .map((word) => {
+        return word.text;
+      })
+      .join(" "),
+    "  ",
+    " "
+  );
 }
 
 // console.log(
